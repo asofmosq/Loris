@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
+var projConfig = require('./project/webpack-project.config.js');
+
 var config = {
   entry: {
     './htdocs/js/components/DynamicDataTable.js': './jsx/DynamicDataTable.js',
@@ -86,5 +88,7 @@ var config = {
   devtool: 'source-map',
   plugins: [new webpack.optimize.UglifyJsPlugin({mangle: false})]
 };
+
+config = [config,projConfig];
 
 module.exports = config;
