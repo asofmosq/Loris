@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-
-var projConfig = require('./project/webpack-project.config.js');
+var fs = require('fs');
 
 var config = {
   entry: {
@@ -89,6 +88,11 @@ var config = {
   plugins: [new webpack.optimize.UglifyJsPlugin({mangle: false})]
 };
 
-config = [config,projConfig];
+// Support project overrides
+if (fs.existsSync('./project/webpack-project.config.js')) {
+  exists=true;
+  projConfig = require('./project/webpack-project.config.js');
+  config = [config, projConfig];
+}
 
 module.exports = config;
